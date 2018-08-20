@@ -3,3 +3,7 @@ dist: trusty
 language: node_js
 node_js:
   - "8"
+cache:
+  timeout: 1000
+  directories:
+    - node_modules # NPM packages
