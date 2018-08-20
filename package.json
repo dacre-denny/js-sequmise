@@ -1,0 +1,26 @@
+{
+  "name": "js-sequmise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dacredenny/js-sequmise.git"
+  },
+  "author": "Dacre Denny",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dacredenny/js-sequmise/issues"
+  },
+  "homepage": "https://github.com/dacredenny/js-sequmise#readme",
+  "devDependencies": {
+    "babel-loader": "^7.1.5",
+    "mocha": "^5.2.0",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^2.1.5"
+  }
+}
