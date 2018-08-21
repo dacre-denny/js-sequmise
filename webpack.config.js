@@ -8,11 +8,14 @@ module.exports = {
     library: 'sequmise',
     libraryTarget: 'umd',
     path: path.resolve(__dirname, 'dist'),
+    globalObject: 'this'
   },
   devtool: 'source-map',
   module: {
-    rules: [
-      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
-    ]
+    rules: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: "babel-loader"
+    }]
   }
 }

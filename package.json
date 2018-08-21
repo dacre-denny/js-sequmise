@@ -1,8 +1,8 @@
 {
-  "name": "js-sequmise",
+  "name": "sequmise",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/sequmise.js",
   "scripts": {
     "test": "mocha",
     "build": "webpack",
