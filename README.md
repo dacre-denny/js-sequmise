@@ -108,17 +108,14 @@ Support for nested async tasks and value combinations:
 Support for tasks across multiple arguments/spreading:
 
 ```
-    const results = await sequmise(123,
-        asyncReturn('goodbye'),
-        'hello world',
-        asyncReturn('moon'))
+    const results = await sequmise(123, asyncReturn('goodbye'), 'test', asyncReturn('moon'))
 
     /*
     If async tasks resolved successfully, results will be:
     [
         123,
         'goodbye'
-        'hello world'
+        'test'
         'moon'
     ]
     */
