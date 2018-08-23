@@ -1,5 +1,5 @@
 <h1 align="center">sequmise</h1>
-<p align="center">Resolve collections of promises sequentially</p>
+<p align="center">resolve arrays of promises sequentially</p>
 
 <p align="center">
     <a href="https://travis-ci.org/dacredenny/js-sequmise">
@@ -24,62 +24,64 @@
 npm install sequmise
 ```
 
-#### Usage
+#### Basic Usage
 
 ```
     import sequmise from '/sequmise';
 
-    const results = await sequmise([
+    // sequmise will resolve async tasks sequentially and return the resolved results in order
+    assert.deepEqual(await sequmise([
         fetch('/session'),   // resolves to { session : '123' }
         fetch('/user'),      // resolves to { user : { id : 13, name : 'John Smith' }},
         createAsyncTask(),   // resolves to { finished : true, duration : 500 }
         createSyncTask()     // resolves to { message : 'hello world' }
-    ])
-
-    /*
-    If all tasks resolved successfully, results will be:
-    [
+    ]), [
         { session : '123' },
         { user : { id : 13, name : 'John Smith' }},
         { finished : true, duration : 500 },
         { message : 'hello world' }
-    ]
-    */
+    ])
+
+    // sequmise will reject if any async task in sequence is rejected
+    await assert.isRejected(sequmise([
+        createAsyncTask('hellow'),
+        createAsyncTask('world'),
+        createAsyncTaskReject('something went wrong!')
+    ]))
 ```
 
 ## Introduction
 
-sequmise is a light weight utility library that simplifies sequential execution of multiple asynchronous tasks.
+**_sequmise_** is a light weight utility library that simplifies sequential execution of promises/asynchronous tasks, returning the results of each task in their order of execution.
 
-For situations where multiple asynchronous tasks need to be processed, with resolved results returned in the order of processing, try sequmise. With no external dependencies and a simple, flexible API, sequmise is a useful tool to have on hand for your next project.
+With no external dependencies and a simple, flexible API, **_sequmise_** is a useful tool to have on hand for your next project.
 
 ## Advanced Usage
 
-Support for asnyc tasks and value combinations:
+Support for value, sync and async task combinations:
 
 ```
-    const results = await sequmise([
+    // sequmise will sequentially resolve values, sync and async tasks and return the resolved
+    // results in order
+    assert.deepEqual(await sequmise([
         123,                 // resolves to 123
         fetch('/session'),   // resolves to { session : '123' }
         'hello world',       // resolves to 'hello world'
         fetch('/user'),      // resolves to { user : { id : 13, name : 'John Smith' }},
-    ])
-
-    /*
-    If async tasks resolved successfully, results will be:
-    [
+    ]), [
         123,
         { session : '123' },
-        'hello world'
+        'hello world',
         { user : { id : 13, name : 'John Smith' }}
-    ]
-    */
+    ])
 ```
 
-Support for nested async tasks and value combinations:
+Support for nested value, sync and async task combinations:
 
 ```
-    const results = await sequmise([
+    // sequmise will sequentially resolve nested arrays as well, honoring the order and nesting
+    // hierarchy
+    assert.deepEqual(await sequmise([
         [
             fetch('/session'),  // resolves to { session : '123' }
             fetch('/user')      // resolves to { user : { id : 13, name : 'John Smith' }},
@@ -88,11 +90,7 @@ Support for nested async tasks and value combinations:
             123,                // resolves to 123,
             createAsyncTask()   // resolves to { testing : 123 }
         ]
-    ])
-
-    /*
-    If async tasks resolved successfully, results will be:
-    [
+    ]), [
         [
             { session : '123' },
             { user : { id : 13, name : 'John Smith' }}
@@ -101,22 +99,26 @@ Support for nested async tasks and value combinations:
             123,
             { testing : 123 }
         ]
-    ]
-    */
+    ])
 ```
 
-Support for tasks across multiple arguments/spreading:
+Support for value, sync and async tasks to be specified via multiple arguments/spreading:
 
 ```
-    const results = await sequmise(123, asyncReturn('goodbye'), 'test', asyncReturn('moon'))
-
-    /*
-    If async tasks resolved successfully, results will be:
-    [
+    assert.deepEqual(await sequmise(
+        123,
+        asyncReturn('goodbye'),
+        'test',
+        asyncReturn('moon')), [
         123,
         'goodbye'
         'test'
         'moon'
-    ]
-    */
+    ])
+```
+
+## Run tests
+
+```
+npm run test
 ```

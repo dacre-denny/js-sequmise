@@ -201,33 +201,32 @@ describe('sequmise', function () {
         })
     })
 
-    if (false)
-        describe('stress testing behaviour', function () {
-            it('should return matching sequence of resolved promises for 10000 tasks', async function () {
+    describe('stress testing behaviour', function () {
+        it('should return matching sequence of resolved promises for 10000 tasks', async function () {
 
-                const inputs = []
-                const results = []
+            const inputs = []
+            const results = []
 
-                for (var i = 0; i < 1000; i++) {
-                    inputs.push(delayedResult(i, 1))
-                    results.push(i)
-                }
+            for (var i = 0; i < 1000; i++) {
+                inputs.push(delayedResult(i, 1))
+                results.push(i)
+            }
 
-                assert.deepEqual(await sequmise(inputs), results)
-            })
-
-            it('should return matching sequence of resolved promises for 100 nested tasks', async function () {
-
-                let inputs = ['hello', 'world']
-                let results = ['hello', 'world']
-
-                for (var i = 0; i < 100; i++) {
-
-                    inputs = [delayedResult(i * 5, 10), inputs, delayedResult(i, 5)]
-                    results = [i * 5, results, i]
-                }
-
-                assert.deepEqual(await sequmise(inputs), results)
-            })
+            assert.deepEqual(await sequmise(inputs), results)
         })
+
+        it('should return matching sequence of resolved promises for 100 nested tasks', async function () {
+
+            let inputs = ['hello', 'world']
+            let results = ['hello', 'world']
+
+            for (var i = 0; i < 100; i++) {
+
+                inputs = [delayedResult(i * 5, 10), inputs, delayedResult(i, 5)]
+                results = [i * 5, results, i]
+            }
+
+            assert.deepEqual(await sequmise(inputs), results)
+        })
+    })
 });
