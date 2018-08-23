@@ -9,7 +9,7 @@
         <img src="https://coveralls.io/repos/github/dacredenny/js-sequmise/badge.svg?branch=master" alt="Coverage Status">
     </a>
     <a href="https://www.npmjs.com/package/sequmise">
-        <img src="https://www.npmjs.com/package/sequmise" alt="Downloads">
+        <img src="https://img.shields.io/npm/dm/sequmise.svg" alt="Downloads">
     </a>
     <a href="https://github.com/dacredenny/js-sequmise">
         <img src="http://githubbadges.com/star.svg?user=dacredenny&amp;repo=js-sequmise&amp;style=flat" alt="star this repo">
