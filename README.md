@@ -30,27 +30,27 @@ npm install sequmise
 #### Basic Usage
 
 ```
-    import sequmise from '/sequmise';
+import sequmise from '/sequmise';
 
-    // sequmise will resolve async tasks sequentially and return the resolved results in order
-    assert.deepEqual(await sequmise([
-        fetch('/session'),   // resolves to { session : '123' }
-        fetch('/user'),      // resolves to { user : { id : 13, name : 'John Smith' }},
-        createAsyncTask(),   // resolves to { finished : true, duration : 500 }
-        createSyncTask()     // resolves to { message : 'hello world' }
-    ]), [
-        { session : '123' },
-        { user : { id : 13, name : 'John Smith' }},
-        { finished : true, duration : 500 },
-        { message : 'hello world' }
-    ])
+// sequmise will resolve async tasks sequentially and return the resolved results in order
+assert.deepEqual(await sequmise([
+    fetch('/session'),   // resolves to { session : '123' }
+    fetch('/user'),      // resolves to { user : { id : 13, name : 'John Smith' }},
+    createAsyncTask(),   // resolves to { finished : true, duration : 500 }
+    createSyncTask()     // resolves to { message : 'hello world' }
+]), [
+    { session : '123' },
+    { user : { id : 13, name : 'John Smith' }},
+    { finished : true, duration : 500 },
+    { message : 'hello world' }
+])
 
-    // sequmise will reject if any async task in sequence is rejected
-    await assert.isRejected(sequmise([
-        createAsyncTask('hellow'),
-        createAsyncTask('world'),
-        createAsyncTaskReject('something went wrong!')
-    ]))
+// sequmise will reject if any async task in sequence is rejected
+await assert.isRejected(sequmise([
+    createAsyncTask('hellow'),
+    createAsyncTask('world'),
+    createAsyncTaskReject('something went wrong!')
+]))
 ```
 
 ## Introduction
@@ -64,60 +64,60 @@ With no external dependencies and a simple, flexible API, **_sequmise_** is a us
 Support for value, sync and async task combinations:
 
 ```
-    // sequmise will sequentially resolve values, sync and async tasks and return the resolved
-    // results in order
-    assert.deepEqual(await sequmise([
-        123,                 // resolves to 123
-        fetch('/session'),   // resolves to { session : '123' }
-        'hello world',       // resolves to 'hello world'
-        fetch('/user'),      // resolves to { user : { id : 13, name : 'John Smith' }},
-    ]), [
-        123,
-        { session : '123' },
-        'hello world',
-        { user : { id : 13, name : 'John Smith' }}
-    ])
+// sequmise will sequentially resolve values, sync and async tasks and return the resolved
+// results in order
+assert.deepEqual(await sequmise([
+    123,                 // resolves to 123
+    fetch('/session'),   // resolves to { session : '123' }
+    'hello world',       // resolves to 'hello world'
+    fetch('/user'),      // resolves to { user : { id : 13, name : 'John Smith' }},
+]), [
+    123,
+    { session : '123' },
+    'hello world',
+    { user : { id : 13, name : 'John Smith' }}
+])
 ```
 
 Support for nested value, sync and async task combinations:
 
 ```
-    // sequmise will sequentially resolve nested arrays as well, honoring the order and nesting
-    // hierarchy
-    assert.deepEqual(await sequmise([
-        [
-            fetch('/session'),  // resolves to { session : '123' }
-            fetch('/user')      // resolves to { user : { id : 13, name : 'John Smith' }},
-        ],
-        [
-            123,                // resolves to 123,
-            createAsyncTask()   // resolves to { testing : 123 }
-        ]
-    ]), [
-        [
-            { session : '123' },
-            { user : { id : 13, name : 'John Smith' }}
-        ],
-        [
-            123,
-            { testing : 123 }
-        ]
-    ])
+// sequmise will sequentially resolve nested arrays as well, honoring the order and nesting
+// hierarchy
+assert.deepEqual(await sequmise([
+    [
+        fetch('/session'),  // resolves to { session : '123' }
+        fetch('/user')      // resolves to { user : { id : 13, name : 'John Smith' }},
+    ],
+    [
+        123,                // resolves to 123,
+        createAsyncTask()   // resolves to { testing : 123 }
+    ]
+]), [
+    [
+        { session : '123' },
+        { user : { id : 13, name : 'John Smith' }}
+    ],
+    [
+        123,
+        { testing : 123 }
+    ]
+])
 ```
 
 Support for value, sync and async tasks to be specified via multiple arguments/spreading:
 
 ```
-    assert.deepEqual(await sequmise(
-        123,
-        asyncReturn('goodbye'),
-        'test',
-        asyncReturn('moon')), [
+assert.deepEqual(await sequmise(
+    123,
+    asyncReturn('goodbye'),
+    'test',
+    asyncReturn('moon')), [
         123,
         'goodbye'
         'test'
         'moon'
-    ])
+])
 ```
 
 ## Run tests
