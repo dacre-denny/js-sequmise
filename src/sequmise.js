@@ -1,3 +1,8 @@
+/**
+ * Helper function processes a task asynchronously. If the tasks is not
+ * a function, the task is treated as a value and returned
+ * @param {*} task - the task to be processed asynchronously
+ */
 async function processTask(task) {
 
     if (task instanceof Function) {
@@ -7,6 +12,12 @@ async function processTask(task) {
     }
 }
 
+/**
+ * Helper function processes an array of asynchronous tasks, sequentially and
+ * in order. If an item in the tasks is itself an array, that item will be 
+ * processed as an array of asynchronous tasks. 
+ * @param {Object[]} tasks - the tasks to be processed asynchronously
+ */
 async function processArray(tasks) {
 
     const results = []
@@ -24,6 +35,13 @@ async function processArray(tasks) {
     return results
 }
 
+/**
+ * Sequentially processes asynchronous tasks that are passed as arguments to the 
+ * library. One or more asynchronous tasks can be specified, either as an array,
+ * or as one or more arguments passed to the library.
+ * Supports processing of asynchronous tasks, synchronous tasks, and values. Nested
+ * arrays are processed recursively.
+ */
 module.exports = async function () {
 
     if (arguments.length === 0) {
@@ -31,12 +49,9 @@ module.exports = async function () {
     }
 
     if (arguments.length === 1) {
-
         if (Array.isArray(arguments[0])) {
-
             return await processArray(arguments[0])
         } else {
-
             return await processTask(arguments[0])
         }
     }
