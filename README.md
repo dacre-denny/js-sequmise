@@ -1,5 +1,5 @@
 <h1 align="center">sequmise</h1>
-<p align="center">resolve arrays of promises sequentially</p>
+<p align="center">resolve arrays of promises and asynchronous tasks sequentially</p>
 
 <p align="center">
     <a href="https://travis-ci.org/dacredenny/js-sequmise">
@@ -32,30 +32,18 @@ npm install sequmise
 ```
 import sequmise from '/sequmise';
 
-// sequmise will resolve async tasks sequentially and return the resolved results in order
-assert.deepEqual(await sequmise([
-    fetch('/session'),   // resolves to { session : '123' }
-    fetch('/user'),      // resolves to { user : { id : 13, name : 'John Smith' }},
-    createAsyncTask(),   // resolves to { finished : true, duration : 500 }
-    createSyncTask()     // resolves to { message : 'hello world' }
-]), [
-    { session : '123' },
-    { user : { id : 13, name : 'John Smith' }},
-    { finished : true, duration : 500 },
-    { message : 'hello world' }
-])
+// Specify asynchronous tasks via array
+const [ session, asyncResult, syncResult ] = await sequmise([ fetch('/session'), asyncTask, syncTask ])
 
-// sequmise will reject if any async task in sequence is rejected
-await assert.isRejected(sequmise([
-    createAsyncTask('hellow'),
-    createAsyncTask('world'),
-    createAsyncTaskReject('something went wrong!')
-]))
+// Specify asynchronous tasks by multiple arguments
+const [ jsonAll, jsonOne ] = await sequmise(fetch('/get/all'), fetch('/get/1'))
 ```
 
 ## Introduction
 
-**_sequmise_** is a light weight utility library that simplifies sequential execution of promises/asynchronous tasks, returning the results of each task in their order of execution.
+**_sequmise_** is a utility that simplifies sequential execution of multiple promises/asynchronous tasks. 
+
+When all supplied tasks execute successfully, **_sequmise_** returns a single array containing the result of each task. The order of results in the returned array matches the order that tasks were executed. If any task throws an exception or is rejected, this behaviour will be propagated by **_sequmise_**.
 
 With no external dependencies and a simple, flexible API, **_sequmise_** is a useful tool to have on hand for your next project.
 
@@ -64,14 +52,16 @@ With no external dependencies and a simple, flexible API, **_sequmise_** is a us
 Support for value, sync and async task combinations:
 
 ```
-// sequmise will sequentially resolve values, sync and async tasks and return the resolved
-// results in order
-assert.deepEqual(await sequmise([
+
+// sequmise will sequentially resolve values, sync and async tasks, returning the resolved results in order
+const results = await sequmise([
     123,                 // resolves to 123
     fetch('/session'),   // resolves to { session : '123' }
     'hello world',       // resolves to 'hello world'
     fetch('/user'),      // resolves to { user : { id : 13, name : 'John Smith' }},
-]), [
+])
+
+assert.deepEqual(results, [
     123,
     { session : '123' },
     'hello world',
@@ -82,9 +72,8 @@ assert.deepEqual(await sequmise([
 Support for nested value, sync and async task combinations:
 
 ```
-// sequmise will sequentially resolve nested arrays as well, honoring the order and nesting
-// hierarchy
-assert.deepEqual(await sequmise([
+// sequmise will sequentially resolve nested arrays, maintaining the order and nesting hierarchy
+const results = await sequmise([
     [
         fetch('/session'),  // resolves to { session : '123' }
         fetch('/user')      // resolves to { user : { id : 13, name : 'John Smith' }},
@@ -93,7 +82,9 @@ assert.deepEqual(await sequmise([
         123,                // resolves to 123,
         createAsyncTask()   // resolves to { testing : 123 }
     ]
-]), [
+])
+
+assert.deepEqual(results, [
     [
         { session : '123' },
         { user : { id : 13, name : 'John Smith' }}
@@ -108,15 +99,13 @@ assert.deepEqual(await sequmise([
 Support for value, sync and async tasks to be specified via multiple arguments/spreading:
 
 ```
-assert.deepEqual(await sequmise(
+const results = await sequmise(123, asyncReturn('goodbye'), 'test', asyncReturn('moon'))
+
+assert.deepEqual(results, [
     123,
-    asyncReturn('goodbye'),
-    'test',
-    asyncReturn('moon')), [
-        123,
-        'goodbye'
-        'test'
-        'moon'
+    'goodbye'
+    'test'
+    'moon'
 ])
 ```
 
