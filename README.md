@@ -17,6 +17,7 @@
     <a href="https://github.com/dacredenny/js-sequmise/fork">
         <img src="http://githubbadges.com/fork.svg?user=dacredenny&amp;repo=js-sequmise&amp;style=flat" alt="fork this repo">
     </a>
+    <a href="https://codeclimate.com/github/dacredenny/js-sequmise/maintainability"><img src="https://api.codeclimate.com/v1/badges/fd6fb786e4d6dd28c973/maintainability" /></a>
 </p>
 
 ## Quick Start
