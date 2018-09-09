@@ -70,7 +70,7 @@ assert.deepEqual(results, [
 Support for nested value, sync and async task combinations:
 
 ```
-// sequmise will sequentially resolve nested arrays, maintaining the order and nesting hierarchy
+// sequmise will resolve nested arrays, maintaining the order and nesting hierarchy
 const results = await sequmise([
     [
         fetch('/session'),  // resolves to { session : '123' }
