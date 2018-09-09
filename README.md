@@ -53,7 +53,7 @@ With no external dependencies and a simple, flexible API, **_sequmise_** is a us
 Support for value, sync and async task combinations:
 
 ```
-// sequmise will sequentially resolve values, sync and async tasks, returning the resolved results in order
+// sequmise will resolve values, sync and async tasks, returning the resolved results in order
 const results = await sequmise([
     'hello world',          // resolves to 'hello world'
     fetch('/session'),      // resolves to { session : '123' }
