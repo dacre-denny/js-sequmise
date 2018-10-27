@@ -11,12 +11,6 @@
     <a href="https://www.npmjs.com/package/sequmise">
         <img src="https://img.shields.io/npm/dm/sequmise.svg" alt="Downloads">
     </a>
-    <a href="https://github.com/dacredenny/js-sequmise">
-        <img src="http://githubbadges.com/star.svg?user=dacredenny&amp;repo=js-sequmise&amp;style=flat" alt="star this repo">
-    </a>
-    <a href="https://github.com/dacredenny/js-sequmise/fork">
-        <img src="http://githubbadges.com/fork.svg?user=dacredenny&amp;repo=js-sequmise&amp;style=flat" alt="fork this repo">
-    </a>
     <a href="https://codeclimate.com/github/dacredenny/js-sequmise/maintainability"><img src="https://api.codeclimate.com/v1/badges/fd6fb786e4d6dd28c973/maintainability" /></a>
 </p>
 
@@ -53,7 +47,7 @@ With no external dependencies and a simple, flexible API, **_sequmise_** is a us
 Support for value, sync and async task combinations:
 
 ```
-// sequmise will sequentially resolve values, sync and async tasks, returning the resolved results in order
+// sequmise will resolve values, sync and async tasks, returning the resolved results in order
 const results = await sequmise([
     'hello world',          // resolves to 'hello world'
     fetch('/session'),      // resolves to { session : '123' }
@@ -70,7 +64,7 @@ assert.deepEqual(results, [
 Support for nested value, sync and async task combinations:
 
 ```
-// sequmise will sequentially resolve nested arrays, maintaining the order and nesting hierarchy
+// sequmise will resolve nested arrays, maintaining the order and nesting hierarchy
 const results = await sequmise([
     [
         fetch('/session'),  // resolves to { session : '123' }
