@@ -1,6 +1,6 @@
 {
   "name": "sequmise",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "dist/sequmise.js",
   "scripts": {
@@ -13,6 +13,18 @@
     "type": "git",
     "url": "git+https://github.com/dacredenny/js-sequmise.git"
   },
+  "keywords": [
+    "async",
+    "await",
+    "promise",
+    "promise-chain",
+    "javascript",
+    "nodejs",
+    "for",
+    "loop",
+    "asynchronous-tasks",
+    "for-each"
+  ],
   "author": "Dacre Denny",
   "license": "MIT",
   "bugs": {
