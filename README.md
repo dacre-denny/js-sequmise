@@ -28,10 +28,12 @@ npm install sequmise
 import sequmise from '/sequmise';
 
 // Specify asynchronous tasks via array
-const [ session, asyncResult, syncResult ] = await sequmise([ fetch('/session'), asyncTask, syncTask ])
+const [ session, asyncResult, syncResult ] = 
+    await sequmise([ fetch('/session'), asyncTask, syncTask ])
 
 // Specify asynchronous tasks by multiple arguments
-const [ jsonAll, jsonOne ] = await sequmise(fetch('/get/all'), fetch('/get/1'))
+const [ jsonAll, jsonOne ] = 
+    await sequmise(fetch('/get/all'), fetch('/get/1'))
 ```
 
 ## Introduction
@@ -47,7 +49,8 @@ With no external dependencies and a simple, flexible API, **_sequmise_** is a us
 Support for value, sync and async task combinations:
 
 ```
-// sequmise will resolve values, sync and async tasks, returning the resolved results in order
+// sequmise will resolve values, sync and async tasks, returning the 
+// resolved results in order
 const results = await sequmise([
     'hello world',          // resolves to 'hello world'
     fetch('/session'),      // resolves to { session : '123' }
@@ -64,7 +67,8 @@ assert.deepEqual(results, [
 Support for nested value, sync and async task combinations:
 
 ```
-// sequmise will resolve nested arrays, maintaining the order and nesting hierarchy
+// sequmise will resolve nested arrays, maintaining the order and 
+// nesting hierarchy
 const results = await sequmise([
     [
         fetch('/session'),  // resolves to { session : '123' }
@@ -91,7 +95,10 @@ assert.deepEqual(results, [
 Support for value, sync and async tasks to be specified via multiple arguments/spreading:
 
 ```
-const results = await sequmise(123, asyncReturn('goodbye'), 'test', asyncReturn('moon'))
+const results = await sequmise(123, 
+    asyncReturn('goodbye'), 
+    'test', 
+    asyncReturn('moon'))
 
 assert.deepEqual(results, [
     123,
