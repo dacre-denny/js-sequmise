@@ -3,10 +3,10 @@
 
 <p align="center">
     <a href="https://travis-ci.org/dacre-denny/js-sequmise">
-        <img src="https://api.travis-ci.org/dacredenny/js-sequmise.svg?branch=master" alt="build">
+        <img src="https://api.travis-ci.org/dacre-denny/js-sequmise.svg?branch=master" alt="build">
     </a>
     <a href="https://coveralls.io/github/dacre-denny/js-sequmise?branch=master">
-        <img src="https://coveralls.io/repos/github/dacredenny/js-sequmise/badge.svg?branch=master" alt="Coverage Status">
+        <img src="https://coveralls.io/repos/github/dacre-denny/js-sequmise/badge.svg?branch=master" alt="Coverage Status">
     </a>
     <a href="https://www.npmjs.com/package/sequmise">
         <img src="https://img.shields.io/npm/dm/sequmise.svg" alt="Downloads">
