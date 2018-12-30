@@ -11,7 +11,7 @@
     <a href="https://www.npmjs.com/package/sequmise">
         <img src="https://img.shields.io/npm/dm/sequmise.svg" alt="Downloads">
     </a>
-    <a href="https://codeclimate.com/github/dacre-denny/js-sequmise/maintainability"><img src="https://api.codeclimate.com/v1/badges/fd6fb786e4d6dd28c973/maintainability" /></a>
+    <a href="https://app.codacy.com/app/dacre-denny/js-sequmise?utm_source=github.com&utm_medium=referral&utm_content=dacre-denny/js-sequmise&utm_campaign=Badge_Grade_Dashboard"><img src="https://api.codacy.com/project/badge/Grade/e5d066a126664778b259b48f814465a0" /></a>
 </p>
 
 ## Quick Start
