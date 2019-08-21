@@ -1,14 +1,18 @@
 {
   "name": "sequmise",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "dist/sequmise.js",
   "scripts": {
     "test": "mocha",
     "build": "webpack",
     "cover": "istanbul cover _mocha",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
+    "prepublish": "build"
   },
+  "pre-commit": [
+    "build"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dacredenny/js-sequmise.git"
@@ -41,7 +45,8 @@
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",
     "webpack": "^4.16.5",
-    "webpack-cli": "^3.3.7"
+    "webpack-cli": "^3.3.7",
+    "pre-commit": "^1.2.2"
   },
   "dependencies": {}
 }
