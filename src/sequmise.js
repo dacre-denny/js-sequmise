@@ -20,12 +20,12 @@ async function processTask(task) {
 async function processArray(tasks) {
   const results = [];
 
-  while (tasks.length) {
-    const task = tasks.shift();
-
+  for (const task of tasks) {
     if (Array.isArray(task)) {
+      /* If task is an array, process task as an array */
       results.push(await processArray(task));
     } else {
+      /* If task is non array, process as generic task */
       results.push(await processTask(task));
     }
   }
@@ -47,11 +47,14 @@ module.exports = async function() {
 
   if (arguments.length === 1) {
     if (Array.isArray(arguments[0])) {
+      /* If single argument supplied is array, process argument as an array */
       return await processArray(arguments[0]);
     } else {
+      /* If single argument is non array, process argument as generic task */
       return await processTask(arguments[0]);
     }
   }
 
+  /* If more than one argument, convert to and process as an array */
   return await processArray(Array.from(arguments));
 };
