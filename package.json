@@ -1,6 +1,6 @@
 {
   "name": "sequmise",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "dist/sequmise.js",
   "scripts": {
@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/dacredenny/js-sequmise#readme",
   "devDependencies": {
+    "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
