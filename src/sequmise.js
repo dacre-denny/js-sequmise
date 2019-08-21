@@ -5,8 +5,10 @@
  */
 async function processTask(task) {
   if (typeof task === "function") {
+    /* Invoke task if it is a function */
     return await task();
   } else {
+    /* Return task as value if not a function */
     return task;
   }
 }
