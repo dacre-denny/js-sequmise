@@ -33,7 +33,7 @@ import sequmise from '/sequmise';
 const [ session, asyncResult, syncResult ] = await sequmise([ fetch('/session'), asyncTask, syncTask ])
 
 /* Execute multiple asynchronous tasks by arguments */
-const [ jsonAll, jsonOne ] = await sequmise(fetch('/get/all'), fetch('/get/1'))
+const [ jsonAll, jsonOne ] = await sequmise(fetch('/get/all'), fetch('/get/one'))
 ```
 
 ## Introduction
@@ -51,7 +51,7 @@ Support for value, sync and async task combinations:
 ```
 /* Resolve values, sync and async tasks, returning the resolved values in order */
 const results = await sequmise([
-  'hello world',      // resolves to 'hello world'
+  'hello world',        // resolves to 'hello world'
   fetch('/session'),    // resolves to { session : '123' }
   fetch('/username'),   // resolves to { username : 'John Smith' }
 ])
@@ -70,10 +70,10 @@ Support for nested value, sync and async task combinations:
 const results = await sequmise([
   [
     fetch('/session'),  // resolves to { session : '123' }
-    fetch('/user')    // resolves to { username : 'John Smith' }
+    fetch('/user')      // resolves to { username : 'John Smith' }
   ],
   [
-    123,        // resolves to 123,
+    123,                // resolves to 123,
     createAsyncTask()   // resolves to { testing : 123 }
   ]
 ])
