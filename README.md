@@ -29,18 +29,16 @@ npm install sequmise
 ```
 import sequmise from '/sequmise';
 
-// Specify asynchronous tasks via array
-const [ session, asyncResult, syncResult ] = 
-    await sequmise([ fetch('/session'), asyncTask, syncTask ])
+/* Execute multiple asynchronous tasks by array */
+const [ session, asyncResult, syncResult ] = await sequmise([ fetch('/session'), asyncTask, syncTask ])
 
-// Specify asynchronous tasks by multiple arguments
-const [ jsonAll, jsonOne ] = 
-    await sequmise(fetch('/get/all'), fetch('/get/1'))
+/* Execute multiple asynchronous tasks by arguments */
+const [ jsonAll, jsonOne ] = await sequmise(fetch('/get/all'), fetch('/get/1'))
 ```
 
 ## Introduction
 
-**_sequmise_** is a utility that simplifies sequential execution of multiple promises/asynchronous tasks. 
+**_sequmise_** is a utility that simplifies sequential execution of multiple promises/asynchronous tasks.
 
 When all supplied tasks execute successfully, **_sequmise_** returns a single array containing the result of each task. The order of results in the returned array matches the order that tasks were executed. If any task throws an exception or is rejected, this behavior will be propagated by **_sequmise_**.
 
@@ -51,8 +49,7 @@ With no external dependencies and a simple, flexible API, **_sequmise_** is a us
 Support for value, sync and async task combinations:
 
 ```
-// sequmise will resolve values, sync and async tasks, returning the 
-// resolved results in order
+/* Resolve values, sync and async tasks, returning the resolved values in order */
 const results = await sequmise([
     'hello world',          // resolves to 'hello world'
     fetch('/session'),      // resolves to { session : '123' }
@@ -69,8 +66,7 @@ assert.deepEqual(results, [
 Support for nested value, sync and async task combinations:
 
 ```
-// sequmise will resolve nested arrays, maintaining the order and 
-// nesting hierarchy
+/* Resolve nested arrays, maintaining nested order and hierarchy */
 const results = await sequmise([
     [
         fetch('/session'),  // resolves to { session : '123' }
@@ -97,9 +93,9 @@ assert.deepEqual(results, [
 Support for value, sync and async tasks to be specified via multiple arguments/spreading:
 
 ```
-const results = await sequmise(123, 
-    asyncReturn('goodbye'), 
-    'test', 
+const results = await sequmise(123,
+    asyncReturn('goodbye'),
+    'test',
     asyncReturn('moon'))
 
 assert.deepEqual(results, [
