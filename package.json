@@ -8,7 +8,7 @@
     "build": "webpack",
     "cover": "istanbul cover _mocha",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
-    "prepublish": "build"
+    "prepublish": "npm build"
   },
   "pre-commit": [
     "build"
