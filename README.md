@@ -27,7 +27,7 @@ npm install sequmise
 #### Basic Usage
 
 ```
-import sequmise from '/sequmise';
+import sequmise from 'sequmise';
 
 /* Execute multiple asynchronous tasks by array */
 const [ session, asyncResult, syncResult ] = await sequmise([ fetch('/session'), asyncTask, syncTask ])
