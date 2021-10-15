@@ -1,6 +1,6 @@
 {
   "name": "sequmise",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Resolve arrays of promises and asynchronous tasks sequentially",
   "main": "dist/sequmise.js",
   "scripts": {
